@@ -1,46 +1,32 @@
 ﻿namespace LeetCodeSolutions;
 public class Program
 {
-    private readonly Dictionary<string, int> _romanLetters = new Dictionary<string, int>()
+    private readonly Dictionary<char, int> _romanLetters = new()
     {
-        {"I", 1},
-        {"V", 5},
-        {"X", 10},
-        {"L", 50},
-        {"C", 100},
-        {"D", 500},
-        {"M", 1000}
+        {'I', 1},
+        {'V', 5},
+        {'X', 10},
+        {'L', 50},
+        {'C', 100},
+        {'D', 500},
+        {'M', 1000}
     };
-    public int toRoman(char letter)
+
+    public int ToRoman(char letter)
     {
-        switch (letter)
-        {
-            case 'I':
-                return 1;
-            case 'V':
-                return 5;
-            case 'X':
-                return 10;
-            case 'L':
-                return 50;
-            case 'C':
-                return 100;
-            case 'D':
-                return 500;
-            case 'M':
-                return 1000;
-            default:
-                return 0;
-        }
+        if (!_romanLetters.ContainsKey(letter))
+            return 0;
+        
+        return _romanLetters[letter];
     }
-    
+
     public int RomanToInt(string str)
     {
         int result = 0;
         
         foreach (var letter in str)
         {
-            result += toRoman(letter);
+            result += ToRoman(letter);
         }
 
         if (str.Contains("IV") || str.Contains("IX"))
