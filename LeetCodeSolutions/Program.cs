@@ -4,18 +4,17 @@ public class Program
     public int[] TwoSum(int[] nums, int target)
     {
         int[] outcome = new int[2];
-        
-        for(int i = 0; i < nums.Length; i++)
+        var passedElements = new Dictionary<int, int>();
+
+        for(var i = 0;i < nums.Length;i++)
         {
-            int currentNum = nums[i];
-            for(int j = 1; j < nums.Length; j++)
+            var neededNumber = target - nums[i];
+            if (passedElements.ContainsKey(neededNumber))
             {
-                if (nums[j] == target - currentNum)
-                {
-                    outcome[0] = i;
-                    outcome[1] = j;
-                }
+                outcome[0] = passedElements[neededNumber];
+                outcome[1] = i;
             }
+            else passedElements[nums[i]] = i;
         }
         return outcome;
     }
